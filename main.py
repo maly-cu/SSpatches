@@ -39,6 +39,12 @@ class CombinedDemo(BoxLayout):
 
     # ----------------- GPS -------------------------
 
+
+
+class CombinedDemoApp(App):
+    gps_location = StringProperty()
+    gps_status = StringProperty('Click Start to get GPS location updates')
+
     def request_android_permissions(self):
         """
         Since API 23, Android requires permission to be requested at runtime.
@@ -66,11 +72,6 @@ class CombinedDemo(BoxLayout):
         # # To request permissions without a callback, do:
         # request_permissions([Permission.ACCESS_COARSE_LOCATION,
         #                      Permission.ACCESS_FINE_LOCATION])
-
-
-class CombinedDemoApp(App):
-    gps_location = StringProperty()
-    gps_status = StringProperty('Click Start to get GPS location updates')
 
     def build(self):
         try:
