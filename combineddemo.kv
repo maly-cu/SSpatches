@@ -1,54 +1,71 @@
-<CombinedDemo>:
-    # ------------------------------------ Notification -----------------------------------------
-    orientation: 'vertical'
-    Widget:
-    BoxLayout:
-        orientation: 'horizontal'
-        size_hint: 1, None
-        TextInput:
-            id: notification_title
-            text: 'Put title here'
-            size_hint: 1, None
-        TextInput:
-            id: notification_text
-            text: 'Put message here'
-            size_hint: 1, None
-        TextInput:
-            id: ticker_text
-            text: 'New notification'
-            size_hint: 1, None
-    Button:
-        text: 'Toast Notification'
-        size_hint: 1, None
-        on_release: root.do_notify(mode='toast')
-    Button:
-        text: 'Simple Notification'
-        size_hint: 1, None
-        on_release: root.do_notify(mode='normal')
-    Button:
-        text: 'Fancy Notification'
-        size_hint: 1, None
-        on_release: root.do_notify(mode='fancy')
+Navigator:  # eliminate "<>" to make this a root widget
+    SplashScreen:
+    CombinedDemo:
 
-    # ------------------------------------ GPS -----------------------------------------
-    Widget:
+<SplashScreen>:
+    name: 'Splash'  # name is required
+    MDLabel:
+        text: "SunScream"
+        font_style: "H3"
+        halign: "center"
+        theme_text_color: "Custom"
+        text_color: 159/255, 230/255, 255/255, 1
+
+<CombinedDemo>:
+    name: 'Home'  # name is required
+    # ------------------------------------ Notification -----------------------------------------
+#    orientation: 'vertical'
+#    Widget:
     BoxLayout:
         orientation: 'vertical'
-        spacing: '10dp'
-
-        Label:
-            text: app.gps_location
-
-        Label:
-            text: app.gps_status
 
         BoxLayout:
-            size_hint_y: None
-            height: '48dp'
-            padding: '4dp'
+            orientation: 'horizontal'
+            size_hint: 1, None
+            TextInput:
+                id: notification_title
+                text: 'Put title here'
+                size_hint: 1, None
+            TextInput:
+                id: notification_text
+                text: 'Put message here'
+                size_hint: 1, None
+            TextInput:
+                id: ticker_text
+                text: 'New notification'
+                size_hint: 1, None
+        Button:
+            text: 'Toast Notification'
+            size_hint: 1, None
+            on_release: root.do_notify(mode='toast')
+        Button:
+            text: 'Simple Notification'
+            size_hint: 1, None
+            on_release: root.do_notify(mode='normal')
+        Button:
+            text: 'Fancy Notification'
+            size_hint: 1, None
+            on_release: root.do_notify(mode='fancy')
 
-            ToggleButton:
-                text: 'Start' if self.state == 'normal' else 'Stop'
-                on_state:
-                    app.start(1000, 0) if self.state == 'down' else \
-                    app.stop()
+        # ------------------------------------ GPS -----------------------------------------
+        Widget:
+        BoxLayout:
+            orientation: 'vertical'
+            spacing: '10dp'
+
+            Label:
+                text: app.gps_location
+
+            Label:
+                text: app.gps_status
+
+            BoxLayout:
+                size_hint_y: None
+                height: '48dp'
+                padding: '4dp'
+
+                ToggleButton:
+                    text: 'Start' if self.state == 'normal' else 'Stop'
+                    on_state:
+                        app.start(1000, 0) if self.state == 'down' else \
+                        app.stop()

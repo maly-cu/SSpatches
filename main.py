@@ -4,17 +4,39 @@ import kivy
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 
-from plyer import notification
-from plyer.utils import platform
-
-from plyer import gps
 from kivy.properties import StringProperty
 from kivy.clock import mainthread
 
+from kivymd.app import MDApp
+from kivymd.uix.label import MDLabel
+
+from plyer import notification
+from plyer.utils import platform
+from plyer import vibrator
+from plyer import gps
+
 kivy.require('1.8.0')
 
+from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.lang.builder import Builder
+from kivy.clock import Clock
 
-class CombinedDemo(BoxLayout):
+
+class Navigator(ScreenManager):
+    pass
+
+class SplashScreen(Screen):
+    # ----------------- Splash Screen -------------------------
+
+    """This class will show the splash screen of Docto365"""
+    def on_enter(self, *args):
+        Clock.schedule_once(self.switch_to_home, 5)
+
+    def switch_to_home(self, dt):
+        self.manager.current = 'Home'
+
+
+class CombinedDemo(Screen):
 
     # ----------------- Notification -------------------------
 
@@ -36,12 +58,13 @@ class CombinedDemo(BoxLayout):
         elif mode == 'toast':
             kwargs['toast'] = True
         notification.notify(**kwargs)
+        vibrator.vibrate(5)  # Notification vibration
 
     # ----------------- GPS -------------------------
 
 
 
-class CombinedDemoApp(App):
+class CombinedDemoApp(MDApp):
     gps_location = StringProperty()
     gps_status = StringProperty('Click Start to get GPS location updates')
 
@@ -85,8 +108,11 @@ class CombinedDemoApp(App):
         if platform == "android":
             print("gps.py: Android detected. Requesting permissions")
             self.request_android_permissions()
+        main_kv = Builder.load_file("combineddemo.kv")
+        return main_kv
 
-        return CombinedDemo()
+        #return CombinedDemo()
+
     def start(self, minTime, minDistance):
         gps.start(minTime, minDistance)
 
