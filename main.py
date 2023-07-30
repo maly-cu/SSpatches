@@ -6,6 +6,7 @@
         4. USE (lon, lat) TO SHOW LOCATION(LGA/CITY)
 """
 # ------------------------------ TOMORROW'S TASK --------------------------------
+
 """
         1. USE WEATHER API TO SHOW UV INDEX AND TEMPERATURE
         2. START BUILDING BRAND LOGO, ICONS AND IMAGES
@@ -22,6 +23,7 @@ from kivy.clock import mainthread
 
 from kivymd.app import MDApp
 from kivymd.uix.label import MDLabel
+from kivymd.uix.dialog import MDDialog
 
 from plyer import notification
 from plyer.utils import platform
@@ -143,7 +145,20 @@ class CombinedDemoApp(MDApp):
 
     @mainthread
     def on_status(self, stype, status):
-        self.gps_status = 'type={}\n{}'.format(stype, status)
+        if status == 'provider-enabled':
+            self.gps_status = 'type={}\n{}'.format(stype, status)
+        else:
+            self.open_gps_access_popup()
+
+    # Popup to tell you to turn on location for app
+    def open_gps_access_popup(self):
+        dialog =MDDialog(
+                title="Location Error",
+                text="App needs Location enabled to function properly",
+        )
+        dialog.size_hint = [.8, .8]
+        dialog.pos_hint = {'center_x': .5, 'center_y': .5}
+        dialog.open()
 
     def on_pause(self):
         gps.stop()
