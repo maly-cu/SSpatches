@@ -1,3 +1,16 @@
+# ------------------------------ TODAY'S TASK --------------------------------
+"""
+        1. USE ALARM MANAGER TO PUSH NOTIFICATION AT SPECIFIC TIME (INITIAL B4 WE BUILD SCHEDULE SCREEN)
+        ------DONE ------ 2. MOVE GPS FUNCTION TO SEPERATE SCREEN ------DONE ------
+        ------DONE ------ 3. MAKE SURE IT WORKS (SHOWS COORDINATES) ------DONE ------
+        4. USE (lon, lat) TO SHOW LOCATION(LGA/CITY)
+"""
+# ------------------------------ TOMORROW'S TASK --------------------------------
+"""
+        1. USE WEATHER API TO SHOW UV INDEX AND TEMPERATURE
+        2. START BUILDING BRAND LOGO, ICONS AND IMAGES
+"""
+
 from os.path import join, dirname, realpath
 
 import kivy
@@ -36,7 +49,11 @@ class SplashScreen(Screen):
         self.manager.current = 'Home'
 
 
-class CombinedDemo(Screen):
+class HomePage(Screen):
+    pass
+
+
+class NotifDemo(Screen):
 
     # ----------------- Notification -------------------------
 
