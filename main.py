@@ -134,6 +134,7 @@ class CombinedDemoApp(MDApp):
 
     def start(self, minTime, minDistance):
         gps.start(minTime, minDistance)
+        gps.stop()
 
     def stop(self):
         gps.stop()
