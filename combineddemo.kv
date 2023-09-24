@@ -93,3 +93,20 @@ Navigator:  # eliminate "<>" to make this a root widget
             size_hint: 1, None
             on_release: root.do_notify(mode='fancy')
 
+    AnchorLayout:
+
+        # position of Anchor Layout
+        anchor_x: 'right'
+        anchor_y: 'top'
+        padding: '10dp'
+
+        MDRectangleFlatIconButton:
+            text: "Back   "
+
+            #md_bg_color: 250/255, 177/255, 109/255, 1
+            #line_color: 250/255, 177/255, 109/255, 1
+            #text_color: 1,1,1,1
+
+            on_release:
+                app.root.current = "Home"
+                root.manager.transition.direction = "right"
