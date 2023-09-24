@@ -24,6 +24,7 @@ from kivy.clock import mainthread
 from kivymd.app import MDApp
 from kivymd.uix.label import MDLabel
 from kivymd.uix.dialog import MDDialog
+from kivymd.uix.button import MDFlatButton
 
 from plyer import notification
 from plyer.utils import platform
@@ -116,6 +117,8 @@ class CombinedDemoApp(MDApp):
         #                      Permission.ACCESS_FINE_LOCATION])
 
     def build(self):
+        self.theme_cls.primary_palette = "Teal" # to set theme color for dialogue box
+
         try:
             gps.configure(on_location=self.on_location,
                           on_status=self.on_status)
@@ -153,10 +156,10 @@ class CombinedDemoApp(MDApp):
 
     # Popup to tell you to turn on location for app
     def open_gps_access_popup(self):
-        dialog =MDDialog(
+        dialog = MDDialog(
                 title="Location Error",
                 text="App needs Location enabled to function properly",
-        )
+                buttons=[ MDFlatButton(text="OK"),],)  # To add button in dialogue box
         dialog.size_hint = [.8, .8]
         dialog.pos_hint = {'center_x': .5, 'center_y': .5}
         dialog.open()
